@@ -26,5 +26,23 @@ namespace BabsHairSalon
       //Assert
       Assert.Equal(1, client.GetStylistId());
     }
+    [Fact]
+    public void Test_IfEqualsOverrideLetsTwoClientsHaveSameName()
+    {
+      //Arrange, Act
+      Client client = new Client("Suzie",1);
+      Client otherClient = new Client("Suzie",1);
+      //Assert
+      Assert.Equal(true, client.Equals(otherClient));
+    }
+    [Fact]
+    public void Test_IfEqualsOverrideFindsTwoClientsHaveDifferentNames()
+    {
+      //Arrange, Act
+      Client client = new Client("Suzie",1);
+      Client otherClient = new Client("Barbara",1);
+      //Assert
+      Assert.Equal(false, client.Equals(otherClient));
+    }
   }
 }
