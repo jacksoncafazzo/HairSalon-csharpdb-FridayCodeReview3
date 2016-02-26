@@ -64,10 +64,10 @@ namespace BabsHairSalon
     }
 
     [Fact]
-    public void Test_Save_AssignsIdToStylistObject()
+    public void Test_Save_AssignsIdToStylistObjectinDatabase()
     {
       //Arrange
-      Stylist testStylist = new Stylist("italian");
+      Stylist testStylist = new Stylist("Italian Mike");
       testStylist.Save();
 
       //Act
@@ -78,6 +78,24 @@ namespace BabsHairSalon
 
       //Assert
       Assert.Equal(testId, result);
+    }
+
+    [Fact]
+    public void Test_Update_UpdatesStylistInDatabase()
+    {
+      //Arrange
+      string StylistName = "Michael's";
+      Stylist testStylist = new Stylist(StylistName);
+      testStylist.Save();
+      string newStylistName = "Nancy's";
+
+      //Act
+      testStylist.Update(newStylistName);
+
+      string result = testStylist.GetName();
+
+      //Assert
+      Assert.Equal(newStylistName, result);
     }
   }
 }
