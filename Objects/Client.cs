@@ -115,5 +115,39 @@ namespace BabsHairSalon
         conn.Close();
       }
     }
+
+    public static Client Find(int ClientId)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE id = @ClientId;", conn);
+      SqlParameter ClientIdParameter = new SqlParameter();
+      ClientIdParameter.ParameterName = "@ClientId";
+      ClientIdParameter.Value = ClientId.ToString();
+      cmd.Parameters.Add(ClientIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      int foundClientId = 0;
+      string foundClientName = null;
+
+      while(rdr.Read())
+      {
+        foundClientId = rdr.GetInt32(0);
+        foundClientName = rdr.GetString(1);
+      }
+      Client foundClient = new Client(foundClientName, foundClientId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundClient;
+    }
   }
 }

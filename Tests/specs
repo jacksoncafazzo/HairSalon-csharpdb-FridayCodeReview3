@@ -14,10 +14,10 @@
 client tests:
 *test if client constructor is working by creating a new instance from inputs.
 *test if equals override functions correctly
-test if Save() saves client object to the database
-test if GetAll() returns a list of all the clients in the database.
-test if DeleteAll() deletes all clients and clients in the database
-test if Find() finds a client by id
+*test if Save() saves client object to the database
+*test if GetAll() returns a list of all the clients in the database.
+*test if DeleteAll() deletes all clients and clients in the database
+*test if Find() finds a client by id
 test if Update() saves changes to a client's name
 test if Delete() deletes one client and their clients
 show Bab all the clients

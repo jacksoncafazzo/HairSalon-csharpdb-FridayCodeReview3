@@ -70,5 +70,20 @@ namespace BabsHairSalon
       Assert.Equal(testClient.GetName(), result[0].GetName());
       Client.DeleteAll();
     }
+    [Fact]
+    public void Test_Find_GetClientInDatabaseById()
+    {
+      //Arrange
+      Client testClient = new Client("Marsha",1);
+      Client otherTestClient = new Client("David",1);
+      testClient.Save();
+      otherTestClient.Save();
+      Client foundClient = Client.Find(testClient.GetId());
+      //Act
+      int returnId = foundClient.GetId();
+
+      //Assert
+      Assert.Equal(testClient.GetName(), foundClient.GetName());
+    }
   }
 }
