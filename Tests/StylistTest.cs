@@ -25,5 +25,17 @@ namespace BabsHairSalon
       // Assert
       Assert.Equal("Babs", stylist.GetName());
     }
+
+    [Fact]
+    public void Test_EqualOverride_ReturnsTrueIfNameIsTheSame()
+    {
+      //Arrange, Act
+      Stylist stylist1 = new Stylist("Babs");
+      Stylist stylist2 = new Stylist("Babs");
+
+      //Assert
+      Assert.Equal(stylist1.GetName(), stylist2.GetName());
+    }
+
   }
 }
