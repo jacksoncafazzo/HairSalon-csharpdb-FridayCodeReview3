@@ -1,4 +1,4 @@
-test if stylist constructor is working by creating a new instance from inputs.
+*test if stylist constructor is working by creating a new instance from inputs.
   *test if equals override functions correctly
   *test if Save() saves stylist object to the database
   *test if GetAll() returns a list of all the stylists in the database.
@@ -6,3 +6,10 @@ test if stylist constructor is working by creating a new instance from inputs.
   *test if Find() finds a stylist by id
   *test if Update() saves changes to a stylist's name
   *test if Delete() deletes one stylist and their clients
+  *show Bab all the stylists
+  *test if Bab can enter new stylists
+  *test if Bab can change name of stylist
+  *test if Bab can delete stylist
+
+client tests:
+test if client constructor is working by creating a new instance from inputs.
