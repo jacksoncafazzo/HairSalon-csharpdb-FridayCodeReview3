@@ -84,10 +84,10 @@ namespace BabsHairSalon
     public void Test_Update_UpdatesStylistInDatabase()
     {
       //Arrange
-      string StylistName = "Michael's";
+      string StylistName = "Michael";
       Stylist testStylist = new Stylist(StylistName);
       testStylist.Save();
-      string newStylistName = "Nancy's";
+      string newStylistName = "Nancy";
 
       //Act
       testStylist.Update(newStylistName);
@@ -96,6 +96,25 @@ namespace BabsHairSalon
 
       //Assert
       Assert.Equal(newStylistName, result);
+    }
+
+    [Fact]
+    public void Test_IfDeleteDeletesStylistInDatabase()
+    {
+      //Arrange
+      List<Stylist> allStylists = new List<Stylist>{};
+      Stylist firstStylist = new Stylist("Michael");
+      Stylist secondStylist = new Stylist("Gunda");
+      firstStylist.Save();
+      secondStylist.Save();
+
+      //Act
+      firstStylist.Delete();
+      allStylists = Stylist.GetAll();
+      string result = allStylists[0].GetName();
+
+      //Assert
+      Assert.Equal("Gunda", result);
     }
   }
 }
