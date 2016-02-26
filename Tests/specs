@@ -18,7 +18,7 @@ client tests:
 *test if GetAll() returns a list of all the clients in the database.
 *test if DeleteAll() deletes all clients and clients in the database
 *test if Find() finds a client by id
-test if Update() saves changes to a client's name
+*test if Update() saves changes to a client's name
 test if Delete() deletes one client and their clients
 show Bab all the clients
 test if Bab can enter new clients

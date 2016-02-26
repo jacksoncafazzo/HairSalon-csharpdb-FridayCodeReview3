@@ -149,5 +149,58 @@ namespace BabsHairSalon
       }
       return foundClient;
     }
+
+    public void Update(string NewName)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @NewName OUTPUT INSERTED.name WHERE id = @ClientId;", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@NewName";
+      nameParameter.Value = NewName;
+      cmd.Parameters.Add(nameParameter);
+
+      SqlParameter ClientIdParameter = new SqlParameter();
+      ClientIdParameter.ParameterName = "@ClientId";
+      ClientIdParameter.Value = this._id;
+      cmd.Parameters.Add(ClientIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._name = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM clients WHERE id = @ClientId;", conn);
+
+      SqlParameter ClientIdParameter = new SqlParameter();
+      ClientIdParameter.ParameterName = "@ClientId";
+      ClientIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(ClientIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
   }
 }

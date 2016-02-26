@@ -18,7 +18,7 @@ namespace BabsHairSalon
     }
 
     [Fact]
-    public void Test_IfClientEmptyAtFirst()
+    public void IfClientEmptyAtFirst()
     {
       //Arrange, Act
       int result = Client.GetAll().Count;
@@ -28,7 +28,7 @@ namespace BabsHairSalon
     }
 
     [Fact]
-    public void Test_IfClientMakesClient()
+    public void IfClientMakesClient()
     {
       //Arrange, Act
       Client client = new Client("Suzie",1);
@@ -37,7 +37,7 @@ namespace BabsHairSalon
       Assert.Equal(1, client.GetStylistId());
     }
     [Fact]
-    public void Test_IfEqualsOverrideLetsTwoClientsHaveSameName()
+    public void IfEqualsOverrideLetsTwoClientsHaveSameName()
     {
       //Arrange, Act
       Client client = new Client("Suzie",1);
@@ -46,7 +46,7 @@ namespace BabsHairSalon
       Assert.Equal(true, client.Equals(otherClient));
     }
     [Fact]
-    public void Test_IfEqualsOverrideFindsTwoClientsHaveDifferentNames()
+    public void IfEqualsOverrideFindsTwoClientsHaveDifferentNames()
     {
       //Arrange, Act
       Client client = new Client("Suzie",1);
@@ -56,7 +56,7 @@ namespace BabsHairSalon
     }
 
     [Fact]
-    public void Test_Save_SavesToDatabase()
+    public void Save_SavesToDatabase()
     {
       Client.DeleteAll();
       //Arrange
@@ -70,8 +70,9 @@ namespace BabsHairSalon
       Assert.Equal(testClient.GetName(), result[0].GetName());
       Client.DeleteAll();
     }
+
     [Fact]
-    public void Test_Find_GetClientInDatabaseById()
+    public void Find_GetClientInDatabaseById()
     {
       //Arrange
       Client testClient = new Client("Marsha",1);
@@ -84,6 +85,37 @@ namespace BabsHairSalon
 
       //Assert
       Assert.Equal(testClient.GetName(), foundClient.GetName());
+    }
+
+    [Fact]
+    public void Update_UpdatesClientInDatabase()
+    {
+      //Arrange
+      Client testClient = new Client("Michael",0);
+      testClient.Save();
+      //Act
+      testClient.Update("Nancy");
+
+      string result = testClient.GetName();
+
+      //Assert
+      Assert.Equal("Nancy", result);
+    }
+    [Fact]
+    public void Delete_IfDeletesClientInDatabase()
+    {
+      //Arrange
+      Client firstClient = new Client("Princess",0);
+      Client secondClient = new Client("Gunda",1);
+      firstClient.Save();
+      secondClient.Save();
+      // Client foundClientId = secondClient.GetId();
+
+      //Act
+      firstClient.Delete();
+      List<Client> allClients = Client.GetAll();
+      //Assert
+      Assert.Equal("Gunda", allClients[0].GetName());
     }
   }
 }
