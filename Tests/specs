@@ -19,7 +19,8 @@ client tests:
 *test if DeleteAll() deletes all clients and clients in the database
 *test if Find() finds a client by id
 *test if Update() saves changes to a client's name
-test if Delete() deletes one client and their clients
+*test if Delete() deletes one client and their clients
+* test if GetByStylistId() returns clients based on stylist id
 show Bab all the clients
 test if Bab can enter new clients
 test if Bab can change name of client

@@ -101,6 +101,7 @@ namespace BabsHairSalon
       //Assert
       Assert.Equal("Nancy", result);
     }
+
     [Fact]
     public void Delete_IfDeletesClientInDatabase()
     {
@@ -115,7 +116,22 @@ namespace BabsHairSalon
       firstClient.Delete();
       List<Client> allClients = Client.GetAll();
       //Assert
-      Assert.Equal("Gunda", allClients[0].GetName());
+      Assert.Equal(1, allClients.Count);
+    }
+
+    [Fact]
+    public void FindByStylistId_IfFindClientsOfStylist()
+    {
+      //Arrange
+      Client firstClient = new Client("Largess",1);
+      Client secondClient = new Client("Belinda",1);
+      firstClient.Save();
+      secondClient.Save();
+
+      //Act
+      List<Client> foundClients = Client.FindByStylistId(1);
+      //Assert
+      Assert.Equal("Belinda", foundClients[1].GetName());
     }
   }
 }

@@ -1,0 +1,21 @@
+body {
+  font-family: "Palatino Linotype";
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  background-color: #E91E63;
+  color: black;
+  text-shadow: 2px 1px 1px white;
+}
+
+input {
+  background-color: #F8BBD0;
+}
+
+button {
+  background-color: #C51162;
+  color: white;
+  text-shadow: 1px 0px 1px #C51162;
+}

@@ -131,13 +131,15 @@ namespace BabsHairSalon
 
       int foundClientId = 0;
       string foundClientName = null;
+      int foundClientStylist = 0;
 
       while(rdr.Read())
       {
         foundClientId = rdr.GetInt32(0);
         foundClientName = rdr.GetString(1);
+        foundClientStylist = rdr.GetInt32(2);
       }
-      Client foundClient = new Client(foundClientName, foundClientId);
+      Client foundClient = new Client(foundClientName, foundClientStylist, foundClientId);
 
       if (rdr != null)
       {
@@ -148,6 +150,44 @@ namespace BabsHairSalon
         conn.Close();
       }
       return foundClient;
+    }
+
+    public static List<Client> FindByStylistId(int StylistId)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE stylist_id = @StylistId;", conn);
+      SqlParameter ClientStylistIdParameter = new SqlParameter();
+      ClientStylistIdParameter.ParameterName = "@StylistId";
+      ClientStylistIdParameter.Value = StylistId.ToString();
+      cmd.Parameters.Add(ClientStylistIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      int foundClientId = 0;
+      string foundClientName = null;
+      int foundClientStylist = 0;
+      List<Client> foundClients = new List<Client>{};
+
+      while(rdr.Read())
+      {
+        foundClientId = rdr.GetInt32(0);
+        foundClientName = rdr.GetString(1);
+        foundClientStylist = rdr.GetInt32(2);
+        Client newClient = new Client(foundClientName, foundClientStylist, foundClientId);
+        foundClients.Add(newClient);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundClients;
     }
 
     public void Update(string NewName)

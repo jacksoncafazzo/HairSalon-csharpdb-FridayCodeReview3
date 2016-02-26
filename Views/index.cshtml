@@ -1,5 +1,6 @@
+@Html.Partial("header.cshtml")
 <h1>Welcome to Bab's Barber Shop</h1>
-<form action="/add_stylist" method="post">
+<form class="add-stylist" action="/add_stylist" method="post">
   <label for="stylist-name"></label>
   <input type="text" name="stylist-name" value="" placeholder="enter name here">
   <button type="submit" name="button">Add Stylist</button>
@@ -14,6 +15,12 @@
     {
 
       <li><a href="/stylist/@stylist.GetId()">@stylist.GetName()</a></li>
+      <ul>
+        @foreach (var client in stylist.FindByStylistId())
+        {
+          <li>client.GetName()</li>
+        }
+      </ul>
     }
   </ol>
   <form action="/clear_all" method="post">

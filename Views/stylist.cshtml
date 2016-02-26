@@ -1,20 +1,26 @@
 <h1>Well hello there!</h1>
 
-<h3>Here's the stylist you are viewing:</h3>
-
-<ul>
-  <li><h3>@Model.GetName()</h3></li>
-</ul>
+<h3>Here are the clients for @Model["stylist"].GetName():</h3>
+<ol>
+  @foreach (var client in @Model["clients"])
+  {
+    <li><h4>@client.GetName()</h4></li>
+  }
+</ol>
+<form action='/stylist/@Model["stylist"].GetId()/add_client' method="post">
+  <input type="text" name="client-name" value="" placeholder="enter new client here">
+  <button type="submit" name="client">ADD DEEZ</button>
+</form>
 
 <p>Would you like to change this stylist's name?</p>
-<form action="/stylist/@Model.GetId()/update" method="post">
+<form action='/stylist/@Model["stylist"].GetId()/update' method="post">
   <input type="hidden" name="_method" value="PATCH">
-  <input type="text" name="new-stylist-name" value="" placeholder="@Model.GetName()">
+  <input type="text" name="new-stylist-name" value="" placeholder='@Model["stylist"].GetName()'>
   <button type="submit" name="button">HELL YEAH</button>
 </form>
-<form action="/stylist/@Model.GetId()/delete" method="post">
+<form action='/stylist/@Model["stylist"].GetId()/delete' method="post">
   <input type="hidden" name="_method" value="DELETE">
   <button type="submit" name="button">NAH MAN DELETE IT</button>
 </form>
 <hr>
-<a href="/all_stylists">View All Stylists</a>
+<a href="/stylists/all">View All Stylists</a>

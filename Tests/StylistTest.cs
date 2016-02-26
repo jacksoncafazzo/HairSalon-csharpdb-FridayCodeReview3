@@ -123,7 +123,7 @@ namespace BabsHairSalon
       firstStylist.Delete();
       List<Stylist> allStylists = Stylist.GetAll();
       //Assert
-      Assert.Equal("Gunda", allStylists[0].GetName());
+      Assert.Equal(1, allStylists.Count);
     }
   }
 }

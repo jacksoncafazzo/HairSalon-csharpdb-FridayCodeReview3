@@ -1,0 +1,10 @@
+<h3>You just added:</h3>
+<ol>
+  <li><h4>@Model.GetName()</h4></li>
+</ol>
+<h3>Add another client for this stylist:</h3>
+<form action="/stylist/@Model.GetStylistId()/add_client" method="post">
+  <input type="text" name="client" value="" placeholder="enter new client here">
+  <button type="submit" name="client">add new client</button>
+</form>
+<a href="/stylist/@Model.GetStylistId()/clients">View All Clients of this stylist</a>
