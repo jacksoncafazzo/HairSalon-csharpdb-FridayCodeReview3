@@ -37,5 +37,21 @@ namespace BabsHairSalon
       Assert.Equal(stylist1.GetName(), stylist2.GetName());
     }
 
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      //Arrange
+      Stylist testStylist = new Stylist("Babs");
+      Stylist otherStylist = new Stylist("Suzie");
+
+      //Act
+      testStylist.Save();
+      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> testList = new List<Stylist>{testStylist};
+
+      //Assert
+      Assert.Equal(testList[0].GetName(), result[0].GetName());
+    }
+
   }
 }
