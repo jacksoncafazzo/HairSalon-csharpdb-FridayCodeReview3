@@ -18,6 +18,16 @@ namespace BabsHairSalon
     }
 
     [Fact]
+    public void Test_IfClientEmptyAtFirst()
+    {
+      //Arrange, Act
+      int result = Client.GetAll().Count;
+
+      //Assert
+      Assert.Equal(0, result);
+    }
+
+    [Fact]
     public void Test_IfClientMakesClient()
     {
       //Arrange, Act
@@ -43,6 +53,22 @@ namespace BabsHairSalon
       Client otherClient = new Client("Barbara",1);
       //Assert
       Assert.Equal(false, client.Equals(otherClient));
+    }
+
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      Client.DeleteAll();
+      //Arrange
+      Client testClient = new Client("Suzie",1);
+
+      //Act
+      testClient.Save();
+      List<Client> result = Client.GetAll();
+
+      //Assert
+      Assert.Equal(testClient.GetName(), result[0].GetName());
+      Client.DeleteAll();
     }
   }
 }

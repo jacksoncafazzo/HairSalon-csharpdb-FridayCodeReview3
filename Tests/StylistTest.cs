@@ -113,19 +113,17 @@ namespace BabsHairSalon
     public void Test_IfDeleteDeletesStylistInDatabase()
     {
       //Arrange
-      List<Stylist> allStylists = new List<Stylist>{};
       Stylist firstStylist = new Stylist("Michael");
       Stylist secondStylist = new Stylist("Gunda");
       firstStylist.Save();
       secondStylist.Save();
+      Stylist foundStylist = Stylist.Find(1);
 
       //Act
       firstStylist.Delete();
-      allStylists = Stylist.GetAll();
-      string result = allStylists[0].GetName();
-
+      List<Stylist> allStylists = Stylist.GetAll();
       //Assert
-      Assert.Equal("Gunda", result);
+      Assert.Equal("Gunda", allStylists[0].GetName());
     }
   }
 }
