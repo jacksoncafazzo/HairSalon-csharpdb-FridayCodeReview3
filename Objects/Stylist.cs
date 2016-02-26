@@ -14,7 +14,10 @@ namespace BabsHairSalon
       _id = Id;
       _name = Name;
     }
-
+    public int GetId()
+    {
+      return _id;
+    }
     public string GetName()
     {
       return _name;

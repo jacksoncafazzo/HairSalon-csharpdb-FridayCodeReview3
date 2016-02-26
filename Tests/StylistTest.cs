@@ -18,6 +18,16 @@ namespace BabsHairSalon
     }
 
     [Fact]
+    public void Test_IfStylistEmptyAtFirst()
+    {
+      //Arrange, Act
+      int result = Stylist.GetAll().Count;
+
+      //Assert
+      Assert.Equal(0, result);
+    }
+
+    [Fact]
     public void Test_IfCanCreate()
     {
       // Arrange, Act
@@ -53,5 +63,21 @@ namespace BabsHairSalon
       Assert.Equal(testList[0].GetName(), result[0].GetName());
     }
 
+    [Fact]
+    public void Test_Save_AssignsIdToStylistObject()
+    {
+      //Arrange
+      Stylist testStylist = new Stylist("italian");
+      testStylist.Save();
+
+      //Act
+      Stylist savedStylist = Stylist.GetAll()[0];
+
+      int result = savedStylist.GetId();
+      int testId = testStylist.GetId();
+
+      //Assert
+      Assert.Equal(testId, result);
+    }
   }
 }
