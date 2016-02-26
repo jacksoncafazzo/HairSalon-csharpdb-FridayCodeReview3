@@ -81,21 +81,32 @@ namespace BabsHairSalon
     }
 
     [Fact]
+    public void Test_Find_ReturnsStylistinDatabaseById()
+    {
+      //Arrange
+      Stylist testStylist = new Stylist("Louise");
+      testStylist.Save();
+
+      //Act
+      Stylist foundStylist = Stylist.Find(testStylist.GetId());
+
+      //Assert
+      Assert.Equal(testStylist.GetName(), foundStylist.GetName());
+    }
+
+    [Fact]
     public void Test_Update_UpdatesStylistInDatabase()
     {
       //Arrange
-      string StylistName = "Michael";
-      Stylist testStylist = new Stylist(StylistName);
+      Stylist testStylist = new Stylist("Michael");
       testStylist.Save();
-      string newStylistName = "Nancy";
-
       //Act
-      testStylist.Update(newStylistName);
+      testStylist.Update("Nancy");
 
       string result = testStylist.GetName();
 
       //Assert
-      Assert.Equal(newStylistName, result);
+      Assert.Equal("Nancy", result);
     }
 
     [Fact]

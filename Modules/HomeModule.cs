@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Nancy;
 using Nancy.ViewEngines.Razor;
@@ -12,7 +13,49 @@ namespace BabsHairSalon
         return View["index.cshtml"];
       };
 
-      
+      Post["/add_stylist"] = _ => {
+        Stylist stylist = new Stylist(Request.Form["stylist-name"]);
+        stylist.Save();
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View["index.cshtml", allStylists];
+      };
+
+      Get["/stylist/{id}"] = parameters => {
+        Stylist stylist = Stylist.Find(parameters.id);
+        return View["stylist.cshtml", stylist];
+      };
+
+      Post["/stylist/{id}"] = parameters => {
+        Stylist stylist = Stylist.Find(parameters.id);
+        stylist.Update(Request.Form["new-stylist-name"]);
+        return View["stylist.cshtml", stylist];
+      };
+
+      Delete["/stylist/{id}/delete"] = parameters => {
+        Stylist stylist = Stylist.Find(parameters.id);
+        stylist.Delete();
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View["index.cshtml", allStylists];
+      };
+
+      Patch["/stylist/{id}/update"] = parameters => {
+        Stylist stylist = Stylist.Find(parameters.id);
+        stylist.Update(Request.Form["new-stylist-name"]);
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View["index.cshtml", allStylists];
+      };
+
+      Get["/stylists/all"] = _ => {
+        List<Stylist> allStylists = Stylist.GetAll();
+        return View["index.cshtml", allStylists];
+      };
+
+      Delete["/clear_all"] = _ => {
+        Stylist.DeleteAll();
+        return View["index.cshtml"];
+      };
+
+
     }
   }
 }
