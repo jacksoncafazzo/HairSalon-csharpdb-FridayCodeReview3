@@ -224,6 +224,7 @@ namespace BabsHairSalon
         conn.Close();
       }
     }
+    
     public void Delete()
     {
       SqlConnection conn = DB.Connection();

@@ -114,16 +114,13 @@ namespace BabsHairSalon
     {
       //Arrange
       Stylist firstStylist = new Stylist("Michael");
-      Stylist secondStylist = new Stylist("Gunda");
       firstStylist.Save();
-      secondStylist.Save();
-      Stylist foundStylist = Stylist.Find(1);
-
+      Stylist foundStylist = Stylist.Find(firstStylist.GetId());
       //Act
       firstStylist.Delete();
       List<Stylist> allStylists = Stylist.GetAll();
       //Assert
-      Assert.Equal(1, allStylists.Count);
+      Assert.Equal(0, allStylists.Count);
     }
   }
 }

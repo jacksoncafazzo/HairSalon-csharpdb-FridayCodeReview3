@@ -84,6 +84,23 @@ namespace BabsHairSalon
         return View["stylist.cshtml", models];
       };
 
+      Delete["stylist/client/{id}/delete"] = parameters => {
+        Client client = Client.Find(parameters.id);
+        client.Delete();
+        return View["success.cshtml"];
+      };
+
+      Patch["/stylist/client/{id}/edit"] = parameters => {
+        Dictionary<string, object> models = new Dictionary<string, object>(){};
+        Client client = Client.Find(parameters.id);
+        client.Update(Request.Form["client-name"]);
+        List<Client> foundClients = Client.FindByStylistId(client.GetStylistId());
+        Stylist stylist = Stylist.Find(client.GetStylistId());
+        models.Add("clients", foundClients);
+        models.Add("stylist", stylist);
+        return View["stylist.cshtml", models];
+      };
+
       Delete["/clear_all"] = _ => {
         Stylist.DeleteAll();
         return View["index.cshtml"];

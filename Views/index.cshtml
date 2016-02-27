@@ -9,18 +9,18 @@
 @if (@Model != null)
 {
   <h2>Stylists at Bab's Barbers</h2>
-  <h3>Click a barber to see their clients</h3>
+  <h3>Click a stylist to see their clients</h3>
   <ol>
     @foreach (var stylist in @Model)
     {
-
-      <li><a href="/stylist/@stylist.GetId()">@stylist.GetName()</a></li>
+      <li><a href="/stylist/@stylist.GetId()">@stylist.GetName()</a>
       <ul>
         @foreach (var client in stylist.FindByStylistId())
         {
           <li>client.GetName()</li>
         }
       </ul>
+      </li>
     }
   </ol>
   <form action="/clear_all" method="post">

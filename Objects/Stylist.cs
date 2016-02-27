@@ -124,9 +124,9 @@ namespace BabsHairSalon
       return allStylists;
     }
 
-    public List<Stylist> FindByStylistId()
+    public List<Client> FindByStylistId()
     {
-      List<Stylist> foundStylists = new List<Stylist>{};
+      List<Client> foundClients = new List<Client>{};
 
       SqlConnection conn = DB.Connection();
       SqlDataReader rdr = null;
@@ -141,10 +141,11 @@ namespace BabsHairSalon
 
       while(rdr.Read())
       {
-        int StylistId = rdr.GetInt32(0);
-        string StylistName = rdr.GetString(1);
-        Stylist newStylist = new Stylist(StylistName, StylistId);
-        foundStylists.Add(newStylist);
+        int ClientId = rdr.GetInt32(0);
+        string ClientName = rdr.GetString(1);
+        int StylistId = rdr.GetInt32(2);
+        Client newClient = new Client(ClientName, StylistId, ClientId);
+        foundClients.Add(newClient);
       }
 
       if (rdr != null)
@@ -156,7 +157,7 @@ namespace BabsHairSalon
         conn.Close();
       }
 
-      return foundStylists;
+      return foundClients;
     }
 
     public void Update(string NewName)
