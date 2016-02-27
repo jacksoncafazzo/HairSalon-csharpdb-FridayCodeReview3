@@ -51,8 +51,19 @@ body a {
 
 body a:hover {
   color: #C51162;
+  background-color: #F8BBD0;
+
 }
 
 .delete-client button {
 text-align: right;
+}
+
+.input-group-addon {
+  background-color: #F06292;
+  color: white;
+}
+
+.llamas {
+  text-align: center;
 }

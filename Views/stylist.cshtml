@@ -1,48 +1,54 @@
 @Html.Partial("header.cshtml")
 <h1>Here are the clients for @Model["stylist"].GetName():</h1>
-<div class="row-lg-12">
+<div class="row">
   <div class="col-md-6 col-sm-6">
   @foreach (var client in @Model["clients"])
   {
     <form action="/stylist/client/@client.GetId()/edit" method="post" name="edit-client">
-      <label for="edit-client">@client.GetName()</label>
-      <input type="hidden" name="_method" value="PATCH">
-      <input type="text-sm" name="client-name" value="">
-      <button class="btn btn-sm" type="submit" name="edit-client">edit</button>
-    </form>
+      <div class="input-group">
+        <span class="input-group-addon">@client.GetName()</span>
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="text" class="form-control" name="client-name" value="">
+        <span class="input-group-btn"><button class="btn btn-sm" type="submit" name="edit-client">edit</button></span>
+      </form>
+    </div>
   }
   </div>
   <div class="col-md-6 col-sm-6">
   @foreach (var client in @Model["clients"])
   {
-    <form action="/stylist/client/@client.GetId()/delete" method="post" name="delete-client">
-      <input type="hidden" name="_method" value="DELETE">
-      <button class="btn btn-sm" type="submit" name="delete-client">remove @client.GetName().ToUpper()</button>
-    </form>
+    <div class="container">
+      <form action="/stylist/client/@client.GetId()/delete" method="post" name="delete-client">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn" type="submit" name="delete-client">remove @client.GetName().ToUpper()</button>
+      </form>
+    </div>
   }
   </div>
 </div>
-
-<form action='/stylist/@Model["stylist"].GetId()/add_client' method="post">
-  <label for="client-name">You can enter a new client for this stylist here:</label>
-  <br>
-  <input type="text" name="client-name" value="" placeholder='client name'>
-  <button class="btn btn-inline" type="submit" name="client">add client</button>
-</form>
-<br>
-<p></p>
-<form action='/stylist/@Model["stylist"].GetId()/update' method="post">
-  <label for="new-stylist-name">Would you like to change this stylist's name?</label>
-  <br>
-  <input type="hidden" name="_method" value="PATCH">
-  <input type="text" name="new-stylist-name" value="" placeholder='@Model["stylist"].GetName()'>
-  <button class="btn btn-inline" type="submit" name="button">edit stylist</button>
-</form>
-<form action='/stylist/@Model["stylist"].GetId()/delete' method="post">
-  <input type="hidden" name="_method" value="DELETE">
-  <br>
-  <p>WARNING! This will button will delete this stylist and all of their clients from the database.
-  <button class="btn btn-inline" type="submit" name="button">DELETE @Model["stylist"].GetName().ToUpper()</button></p>
-</form>
-<hr>
-<a href="/stylists/all">View All Stylists</a>
+<div class="row">
+  <div class="container">
+    <form action='/stylist/@Model["stylist"].GetId()/add_client' method="post">
+      <label for="client-name">You can enter a new client for this stylist here:</label>
+      <br>
+      <input type="text" name="client-name" value="" placeholder='client name'>
+      <button class="btn btn-inline" type="submit" name="client">add client</button>
+    </form>
+    <br>
+    <form action='/stylist/@Model["stylist"].GetId()/update' method="post">
+      <label for="new-stylist-name">Would you like to change this stylist's name?</label>
+      <br>
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="text" name="new-stylist-name" value="" placeholder='@Model["stylist"].GetName()'>
+      <button class="btn btn-inline" type="submit" name="button">edit stylist</button>
+    </form>
+    <form action='/stylist/@Model["stylist"].GetId()/delete' method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <br>
+      <p>WARNING! This will button will delete this stylist and all of their clients from the database.
+      <button class="btn btn-inline" type="submit" name="button">DELETE @Model["stylist"].GetName().ToUpper()</button></p>
+    </form>
+    <hr>
+    <a href="/stylists/all">View All Stylists</a>
+  </div>
+</div>
